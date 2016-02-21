@@ -173,3 +173,6 @@ set runtimepath+=/Users/zarak/Documents/VimL
 
 " Increase command history limit
 set history=200
+
+" Set relative numbering
+set relativenumber
