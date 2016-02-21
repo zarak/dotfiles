@@ -47,6 +47,9 @@ Plugin 'benmills/vimux'
 
 Plugin 'scrooloose/nerdcommenter'
 
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -71,7 +74,7 @@ syntax on
 filetype plugin indent on
 
 " TODO: Pick a leader key
-" let mapleader = ","
+let mapleader = ","
 
 " Security
 set modelines=0
@@ -158,12 +161,15 @@ let g:solarized_termtrans=1
 " colorscheme solarized
 colorscheme industry
 
-" NERDTree command
+" NERDTree shortcut
 map <C-n> :NERDTreeToggle<CR>
-
-" Remap leader key
-let mapleader=","
 
 " vimux run command keymap
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>rb :call VimuxRunCommand("clear; gcc " . bufname("%") . " && ./a.out")<CR>
+
+" Add to runtimepath directory for plugin from VimL book
+set runtimepath+=/Users/zarak/Documents/VimL
+
+" Increase command history limit
+set history=200
