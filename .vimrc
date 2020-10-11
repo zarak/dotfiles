@@ -49,7 +49,8 @@ Plug 'honza/vim-snippets'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 
 Plug 'jiangmiao/auto-pairs'
 
@@ -94,7 +95,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'https://github.com/tpope/vim-rhubarb.git'
 
 " Search in files
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "Plug 'OmniSharp/omnisharp-vim'
@@ -109,10 +110,10 @@ Plug 'cjgajard/patagonia-vim'
 Plug 'sheerun/vim-polyglot'
 
 " For Typescript
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+"Plug 'autozimu/LanguageClient-neovim', {
+    "\ 'branch': 'next',
+    "\ 'do': 'bash install.sh',
+    "\ }
 
 Plug 'simnalamburt/vim-mundo'
 
@@ -128,7 +129,10 @@ Plug 'ionide/Ionide-vim', {
 Plug 'neovimhaskell/haskell-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 
+" Terminal splitting with :Term
+Plug 'vimlab/split-term.vim'
 
+Plug 'leanprover/lean.vim'
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -300,7 +304,7 @@ nnoremap <leader>ik :SMLReplStop<CR>
 let g:nv_search_paths = ['~/notes', './notes.md']
 
 " Set shell to zsh
-set shell=/bin/zsh
+"set shell=/bin/zsh
 
 " Save marks after file exit
 set viminfo='100,f1
@@ -487,7 +491,11 @@ nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
 " Fsharp
-let g:LanguageClient_serverCommands = {
-    \ 'fsharp': ['dotnet', '/Users/name/code/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp2.0/target/FSharpLanguageServer.dll']
-    \ }
+"let g:LanguageClient_serverCommands = {
+    "\ 'fsharp': ['dotnet', '/Users/name/code/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp2.0/target/FSharpLanguageServer.dll']
+    "\ }
 
+
+" Config for split-term plugin
+let g:disable_key_mappings = 1
+set splitbelow
