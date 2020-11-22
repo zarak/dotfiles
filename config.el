@@ -182,6 +182,6 @@
 
 (map! :leader
         :prefix "n"
-        :desc "Build notes from headings that can be matched by MATCH within SCOPE and push them to Anki." "p" #'anki-editor-push-notes
-        :desc "Capture screenshot and insert the resulting file" "x" #'org-download-screenshot
+        :desc "Push notes to anki" "p" #'anki-editor-push-notes
+        :desc "Capture and insert screenshot" "x" #'org-download-screenshot
         )
