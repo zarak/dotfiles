@@ -40,7 +40,6 @@ Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "extra_math_snippets"]
 
 " React code snippets
 Plug 'mlaursen/vim-react-snippets'
@@ -68,13 +67,10 @@ Plug 'justinmk/vim-sneak'
 
 Plug 'lervag/vimtex'
 
-Plug 'KeitaNakamura/tex-conceal.vim'
-
 Plug 'jez/vim-better-sml'
 
 Plug 'pangloss/vim-javascript'
-Plug 'peitalin/vim-jsx-typescript'
-" Plug 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
 
 Plug 'justinj/vim-react-snippets'
 
@@ -111,11 +107,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'cjgajard/patagonia-vim'
 
 " Syntax highlighting
-"
-" Disable html for sane indenting in script tags in html files
-" Remove conflict with vimtex (disable latex)
-let g:polyglot_disabled = ['latex', 'html']
- 
 Plug 'sheerun/vim-polyglot'
 
 " For Typescript
@@ -129,7 +120,7 @@ Plug 'simnalamburt/vim-mundo'
 Plug 'alvan/vim-closetag'
 
 " post install (yarn install | npm install)
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'ionide/Ionide-vim', {
       \ 'do':  'make fsautocomplete',
@@ -148,16 +139,6 @@ Plug 'flazz/vim-colorschemes'
 Plug 'purescript-contrib/purescript-vim' 
 Plug 'frigoeu/psc-ide-vim'
 
-
-Plug 'edwinb/idris2-vim'
-
-Plug 'chrisbra/NrrwRgn'
-
-Plug 'mattn/emmet-vim'
-
-Plug 'wellle/targets.vim'
-
-" Plug 'sbdchd/neoformat'
 
 
 if (has("nvim"))
@@ -216,9 +197,9 @@ set encoding=utf-8
 set wrap
 set textwidth=79
 set formatoptions=tcqrn1
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set noshiftround
 
@@ -315,16 +296,7 @@ set rtp+=/usr/local/opt/fzf
 " Disable callback feature for vimtex
 "let g:vimtex_compiler_latexmk = {'callback' : 0}
 "
-" https://castel.dev/post/lecture-notes-1/
-let g:tex_flavor='latex'
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_quickfix_mode = 0
-
-" tex-conceal
-set conceallevel=1
-let g:tex_conceal='abdmg'
-hi Conceal ctermbg=none
-
+let g:vimtex_view_method = 'skim'
 
 " Change windows in terminal mode of vim-better-sml
 tnoremap <C-w>h <C-\><C-n><C-w>h
@@ -455,15 +427,6 @@ set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-"
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -487,29 +450,11 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 " Haskell Coc Options END
 """""""""""""""""""""""""""""""""""""
 
+" Remove conflict with vimtex
+let g:polyglot_disabled = ['latex']
 
 
 " filenames like *.xml, *.html, *.xhtml, ...
@@ -574,19 +519,3 @@ set undofile
 " fzf mappings
 nnoremap <C-g> :Rg<Cr>
 nnoremap <C-p> :Files<Cr>
-
-" Spelling
-setlocal spell
-set spelllang=en_us
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-
-" Narrow region HSX
-let g:nrrw_custom_options={} 
-let g:nrrw_custom_options['filetype'] = 'html'
-let g:nrrw_rgn_resize_window = 'relative'
-
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Formatter for haskell
-set formatprg=stylish-haskell
