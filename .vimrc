@@ -73,6 +73,7 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'jez/vim-better-sml'
 
 Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
 " Plug 'mxw/vim-jsx'
 
 Plug 'justinj/vim-react-snippets'
@@ -215,9 +216,9 @@ set encoding=utf-8
 set wrap
 set textwidth=79
 set formatoptions=tcqrn1
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set noshiftround
 
@@ -502,6 +503,10 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
 " Haskell Coc Options END
 """""""""""""""""""""""""""""""""""""
 
@@ -570,7 +575,7 @@ set undofile
 nnoremap <C-g> :Rg<Cr>
 nnoremap <C-p> :Files<Cr>
 
-" Spell
+" Spelling
 setlocal spell
 set spelllang=en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
