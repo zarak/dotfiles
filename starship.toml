@@ -84,11 +84,6 @@ format = '\[[$symbol$branch]($style)\]'
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style))'
-ahead = ">"
-behind = "<"
-diverged = "<>"
-renamed = "r"
-deleted = "x"
 
 [golang]
 format = '\[[$symbol($version)]($style)\]'
@@ -193,16 +188,3 @@ format = '\[[$symbol($version)]($style)\]'
 
 [zig]
 format = '\[[$symbol($version)]($style)\]'
-
-[character]
- #success_symbol = "[>](bold green)"
- #error_symbol = "[x](bold red)"
- #vicmd_symbol = "[<](bold green)"
-
-[git_commit]
- #tag_symbol = " tag "
-
-
-[directory]
-read_only = " ro"
-
