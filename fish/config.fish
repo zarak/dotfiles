@@ -1,11 +1,12 @@
 starship init fish | source
+direnv hook fish | source
 
 # Disable greeting
-# set fish_greeting
+set fish_greeting
 
-function fish_greeting
-  command neofetch
-end
+# function fish_greeting
+  # command neofetch
+# end
 
 fish_vi_key_bindings
 # fish_default_key_bindings
@@ -27,3 +28,4 @@ end
 
 # set fish_ambiguous_width 1
 # set fish_emoji_width 1
+set fish_right_prompt
