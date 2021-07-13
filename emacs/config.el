@@ -35,7 +35,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -185,3 +184,7 @@
         :desc "Push notes to anki" "p" #'anki-editor-push-notes
         :desc "Capture and insert screenshot" "x" #'org-download-screenshot
         )
+
+;; https://github.com/hlissner/doom-emacs/issues/407#issuecomment-363215144
+(after! org
+  (setq org-agenda-files (list "~/Dropbox/org/roam/daily")))
