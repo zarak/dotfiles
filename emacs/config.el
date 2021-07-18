@@ -53,16 +53,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(after! org-roam
-        (map! :leader
-            :prefix "n"
-            :desc "org-roam-buffer-toggle" "l" #'org-roam-buffer-toggle
-            :desc "org-roam-node-insert" "i" #'org-roam-node-insert
-            ;; :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-            :desc "org-roam-node-find" "f" #'org-roam-node-find
-            :desc "org-roam-graph" "g" #'org-roam-graph
-            :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today
-            :desc "org-roam-capture" "c" #'org-roam-capture))
 
 ;; (require 'company-org-roam)
 ;;     (use-package company-org-roam
@@ -114,21 +104,6 @@
 (setq org-file-apps
       '((auto-mode . emacs)
         ("\\.x?html?\\'" . "chromium %s")))
-
-
-;; Org-capture templates
-(setq org-my-anki-file "~/Dropbox/org/anki/anki.org")
-(add-to-list 'org-capture-templates
-             '("a" "Anki basic"
-               entry
-               (file+headline org-my-anki-file "Dispatch Shelf")
-               ;; "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: All\n:END:\n** Front\n%?\n** Back\n%x\n"))
-               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: All\n:END:\n** Front\n%?\n** Back\n%x\n"))
-(add-to-list 'org-capture-templates
-             '("A" "Anki cloze"
-               entry
-               (file+headline org-my-anki-file "Dispatch Shelf")
-               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: All\n:END:\n** Text\n%x\n** Extra\n"))
 
 ;; Allow Emacs to access content from clipboard.
 (setq select-enable-clipboard t
@@ -193,7 +168,46 @@
 (use-package org-roam
   :ensure t
   :custom
-  (org-roam-directory "~/Dropbox/org/roam")
+  (org-roam-directory (file-truename "~/Dropbox/org/roam"))
   :config
   (org-roam-setup)
   (require 'org-roam-protocol))
+
+(after! org-roam
+  (setq org-roam-mode-sections
+        (list #'org-roam-backlinks-section
+              #'org-roam-reflinks-section
+              ;; #'org-roam-unlinked-references-section
+              )))
+
+(after! org-roam
+  (map! :leader
+     (:prefix-map ("n" . "notes")
+       (:prefix ("r" . "roam")
+         :desc "org-roam-buffer-toggle" "l" #'org-roam-buffer-toggle
+         :desc "org-roam-node-insert" "i" #'org-roam-node-insert
+         ;; :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
+         :desc "org-roam-node-find" "f" #'org-roam-node-find
+         :desc "org-roam-graph" "g" #'org-roam-graph
+         :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today
+         :desc "org-roam-dailies-goto-today" "d t" #'org-roam-dailies-goto-today
+         :desc "org-roam-dailies-goto-tomorrow" "d m" #'org-roam-dailies-goto-tomorrow
+         :desc "org-roam-dailies-goto-yesterday" "d y" #'org-roam-dailies-goto-yesterday
+         :desc "org-roam-dailies-goto-date" "d d" #'org-roam-dailies-goto-date
+         :desc "org-roam-dailies-goto-previous-note" "d n" #'org-roam-dailies-goto-previous-note
+         :desc "org-roam-capture" "c" #'org-roam-capture))))
+
+;; Org-capture templates
+(after! org
+(setq org-my-anki-file "~/Dropbox/org/anki/anki.org")
+(add-to-list 'org-capture-templates
+             '("a" "Anki basic"
+               entry
+               (file+headline org-my-anki-file "Dispatch Shelf")
+               ;; "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: All\n:END:\n** Front\n%?\n** Back\n%x\n"))
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: All\n:END:\n** Front\n%?\n** Back\n%x\n"))
+(add-to-list 'org-capture-templates
+             '("A" "Anki cloze"
+               entry
+               (file+headline org-my-anki-file "Dispatch Shelf")
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: All\n:END:\n** Text\n%x\n** Extra\n")))
