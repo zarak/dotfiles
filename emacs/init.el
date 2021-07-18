@@ -145,7 +145,7 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
-        +roam              ; wander around notes
+        ;; +roam              ; wander around notes
         +pomodoro)         ; be fruitful with the pomodoro technique
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
@@ -184,4 +184,7 @@
        (default +bindings +smartparens))
 
 (setq evil-respect-visual-line-mode t)
-(setq browse-url-browser-function 'browse-url-chromium)
+(setq browse-url-firefox-program "/run/current-systme/sw/bin/firefox")
+;; https://github.com/org-roam/org-roam/issues/1205
+;; (setq org-roam-completion-everywhere t)
+;;

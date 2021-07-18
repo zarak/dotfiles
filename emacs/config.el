@@ -30,6 +30,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/org/")
+(setq org-roam-directory "~/Dropbox/org/roam/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -55,20 +56,20 @@
 (after! org-roam
         (map! :leader
             :prefix "n"
-            :desc "org-roam" "l" #'org-roam
-            :desc "org-roam-insert" "i" #'org-roam-insert
-            :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-            :desc "org-roam-find-file" "f" #'org-roam-find-file
-            :desc "org-roam-show-graph" "g" #'org-roam-show-graph
-            :desc "org-roam-insert" "i" #'org-roam-insert
+            :desc "org-roam-buffer-toggle" "l" #'org-roam-buffer-toggle
+            :desc "org-roam-node-insert" "i" #'org-roam-node-insert
+            ;; :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
+            :desc "org-roam-node-find" "f" #'org-roam-node-find
+            :desc "org-roam-graph" "g" #'org-roam-graph
+            :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today
             :desc "org-roam-capture" "c" #'org-roam-capture))
 
-(require 'company-org-roam)
-    (use-package company-org-roam
-      :when (featurep! :completion company)
-      :after org-roam
-      :config
-      (set-company-backend! 'org-mode '(company-org-roam company-yasnippet company-dabbrev)))
+;; (require 'company-org-roam)
+;;     (use-package company-org-roam
+;;       :when (featurep! :completion company)
+;;       :after org-roam
+;;       :config
+;;       (set-company-backend! 'org-mode '(company-org-roam company-yasnippet company-dabbrev)))
 
 (use-package org-journal
       :bind
@@ -90,15 +91,15 @@
       (deft-default-extension "org")
       (deft-directory "~/Dropbox/org/"))
 
-(after! org-roam
-      (setq org-roam-capture-ref-templates
-            '(("r" "ref" plain (function org-roam-capture--get-point)
-               "%?"
-               :file-name "websites/${slug}"
-               :head "#+TITLE: ${title}
-    #+ROAM_KEY: ${ref}
-    - source :: ${ref}"
-               :unnarrowed t))))
+;; (after! org-roam
+;;       (setq org-roam-capture-ref-templates
+;;             '(("r" "ref" plain (function org-roam-capture--get-point)
+;;                "%?"
+;;                :file-name "websites/${slug}"
+;;                :head "#+TITLE: ${title}
+;;     #+ROAM_KEY: ${ref}
+;;     - source :: ${ref}"
+;;                :unnarrowed t))))
 
 (after! company-lean
  (global-set-key (kbd "S-SPC") #'company-complete))
@@ -188,3 +189,11 @@
 ;; https://github.com/hlissner/doom-emacs/issues/407#issuecomment-363215144
 (after! org
   (setq org-agenda-files (list "~/Dropbox/org/roam/daily")))
+
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory "~/Dropbox/org/roam")
+  :config
+  (org-roam-setup)
+  (require 'org-roam-protocol))

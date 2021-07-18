@@ -17,6 +17,10 @@
 (package! company-org-roam
    :recipe (:host github :repo "jethrokuan/company-org-roam"))
 
+(unpin! org-roam)
+(package! org-roam
+  :recipe (:host github :repo "org-roam/org-roam" :branch "master"))
+
 (package! lean-mode
    :recipe (:host github :repo "leanprover/lean-mode"))
 
