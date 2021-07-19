@@ -174,28 +174,40 @@
   (require 'org-roam-protocol))
 
 (after! org-roam
-  (setq org-roam-mode-sections
-        (list #'org-roam-backlinks-section
-              #'org-roam-reflinks-section
-              ;; #'org-roam-unlinked-references-section
-              )))
-
-(after! org-roam
   (map! :leader
      (:prefix-map ("n" . "notes")
        (:prefix ("r" . "roam")
+         :desc "Jump to the previous position in the mark ring." "o" #'org-mark-ring-goto
          :desc "org-roam-buffer-toggle" "l" #'org-roam-buffer-toggle
          :desc "org-roam-node-insert" "i" #'org-roam-node-insert
          ;; :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
          :desc "org-roam-node-find" "f" #'org-roam-node-find
          :desc "org-roam-graph" "g" #'org-roam-graph
-         :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today
-         :desc "org-roam-dailies-goto-today" "d t" #'org-roam-dailies-goto-today
-         :desc "org-roam-dailies-goto-tomorrow" "d m" #'org-roam-dailies-goto-tomorrow
-         :desc "org-roam-dailies-goto-yesterday" "d y" #'org-roam-dailies-goto-yesterday
-         :desc "org-roam-dailies-goto-date" "d d" #'org-roam-dailies-goto-date
-         :desc "org-roam-dailies-goto-previous-note" "d n" #'org-roam-dailies-goto-previous-note
-         :desc "org-roam-capture" "c" #'org-roam-capture))))
+         (:prefix ("d" . "dailies")
+                :desc "org-roam-dailies-goto-today" "t" #'org-roam-dailies-goto-today
+                :desc "org-roam-dailies-goto-tomorrow" "m" #'org-roam-dailies-goto-tomorrow
+                :desc "org-roam-dailies-goto-yesterday" "y" #'org-roam-dailies-goto-yesterday
+                :desc "org-roam-dailies-goto-date" "d" #'org-roam-dailies-goto-date
+                :desc "org-roam-dailies-goto-previous-note" "n" #'org-roam-dailies-goto-previous-note
+                :desc "org-roam-dailies-capture-today" "j" #'org-roam-dailies-capture-today)
+         :desc "org-roam-capture" "c" #'org-roam-capture)))
+  ;; Org-roam buffer display
+  (setq org-roam-mode-sections
+        (list #'org-roam-backlinks-section
+              #'org-roam-reflinks-section
+              ;; #'org-roam-unlinked-references-section
+              ))
+  ;; Org-roam capture templates
+  (setq org-roam-dailies-capture-templates
+          '(
+          ;; ("d" "default" entry
+          ;;  "* %?"
+          ;;  :if-new (file+head "%<%Y-%m-%d>.org"
+          ;;               "#+title: %<%Y-%m-%d>\n"))
+          ("m" "math" entry
+          "* TODO Group theory %?\n* TODO Number theory"
+          :if-new (file+head "%<%Y-%m-%d>.org"
+                                  "#+title: %<%Y-%m-%d>\n")))))
 
 ;; Org-capture templates
 (after! org
