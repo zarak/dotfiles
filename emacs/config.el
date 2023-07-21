@@ -19,13 +19,17 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+;; (setq doom-font (font-spec :family "monospace" :size 14 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+;; (setq doom-font (font-spec :family "monospace" :size 16))
+(setq doom-font (font-spec :family "Pragmata Pro Mono" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-horizon)
+;; (setq doom-theme 'doom-horizon)
+;; (setq doom-theme 'doom-old-hope)
+(setq doom-theme 'doom-badger)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -80,6 +84,24 @@
       (deft-use-filter-string-for-filename t)
       (deft-default-extension "org")
       (deft-directory "~/Dropbox/org/"))
+
+(use-package org-wild-notifier
+  :ensure t
+  :custom
+  (alert-default-style 'notifications)
+  (org-wild-notifier-alert-time `(1 5 30))
+  (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
+  (org-wild-notifier-notification-title "Agenda")
+  :config
+  (org-wild-notifier-mode 1))
+
+;; Org-alerts
+;; (use-package org-alert
+;;   :ensure t
+;;   ;; :custom (alert-default-style 'notifications)
+;;   :config
+;;   (setq org-alert-interval 300)
+;;   (org-alert-enable))
 
 ;; (after! org-roam
 ;;       (setq org-roam-capture-ref-templates
@@ -157,13 +179,25 @@
 
 (map! :leader
         :prefix "n"
+        :desc "Insert anki note" "i" #'anki-editor-insert-note
         :desc "Push notes to anki" "p" #'anki-editor-push-notes
         :desc "Capture and insert screenshot" "x" #'org-download-screenshot
         )
 
-;; https://github.com/hlissner/doom-emacs/issues/407#issuecomment-363215144
-(after! org
-  (setq org-agenda-files (list "~/Dropbox/org/roam/daily")))
+;; (after! org
+  ;; https://github.com/hlissner/doom-emacs/issues/407#issuecomment-363215144
+  ;; (setq org-agenda-files '("~/Dropbox/org/roam/daily")))
+  ;;
+  ;; (custom-set-variables
+  ;;  '(org-agenda-files (list
+  ;;                      org-directory
+  ;;                      org-roam-directory))))
+
+(custom-set-variables
+        '(org-agenda-files (list
+                        ;; org-directory
+                            org-roam-directory
+                            (concat org-roam-directory "/daily"))))
 
 (use-package org-roam
   :ensure t
@@ -212,6 +246,7 @@
 ;; Org-capture templates
 (after! org
 (setq org-my-anki-file "~/Dropbox/org/anki/anki.org")
+(setq org-my-workout-file "~/Dropbox/org/Workouts.org")
 (add-to-list 'org-capture-templates
              '("a" "Anki basic"
                entry
@@ -222,4 +257,54 @@
              '("A" "Anki cloze"
                entry
                (file+headline org-my-anki-file "Dispatch Shelf")
-               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: All\n:END:\n** Text\n%x\n** Extra\n")))
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: All\n:END:\n** Text\n%x\n** Extra\n"))
+(add-to-list 'org-capture-templates
+             '("m" "Math basic"
+               entry
+               (file+headline org-my-anki-file "Dispatch Shelf")
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: MathBasic\n:ANKI_DECK: AoPS\n:END:\n** Front\n%?\n** Back\n%x\n"))
+
+;; (add-to-list 'org-capture-templates
+;;              '("w" "PNP1: The True Novice"
+;;                entry
+;;                (file+headline org-my-workout-file "PNP1")
+;;                "** %t\n*** Squat\n- %? \n*** Bench\n*** Deadlift\n"))
+(add-to-list 'org-capture-templates
+             '("w" "Home exercise"
+               entry
+               (file+headline org-my-workout-file "Home exercise")
+               "** TODO %t\n*** Pushup [/]\n- [ ] %? reps \n*** Squat [/]\n- [ ] 20kg x 15 reps\n"))
+)
+
+(after! org
+  ;; Org-books
+  (setq org-books-file "~/Dropbox/org/reading-list.org")
+
+  ;; Org-pomodoro
+  ;; (setq org-pomodoro-audio-player "mplayer")
+  ;; (setq org-pomodoro-finished-sound-args "-volume 20")
+  ;; (setq org-pomodoro-long-break-sound-args "-volume 20")
+  ;; (setq org-pomodoro-short-break-sound-args "-volume 20")
+  ;; (setq org-pomodoro-ticking-sound "-volume 30")
+  (setq org-pomodoro-play-sounds nil)
+  (setq org-pomodoro-ticking-sound-p t)
+
+  ;; Play sound during pomodoro only (and not during breaks)
+  (setq org-pomodoro-ticking-sound-states `(:pomodoro))
+
+  ;; Org-habit
+  (add-to-list 'org-modules 'org-habit)
+
+  ;; Org-template src blocks
+  ;; (add-to-list 'org-structure-template-alist '("ipy" . "src ipython :session :results output"))
+  ;; (add-to-list 'org-structure-template-alist '("ipyim" . "src ipython :session :results raw drawer"))
+  ;; (require 'org-tempo)
+
+  ;; (org-babel-do-load-languages
+  ;;  'org-bable-load-langauges
+  ;;  '((ipython . t)
+  ;;    ))
+
+  ;; (require 'ob-ipython)
+  )
+

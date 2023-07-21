@@ -14,15 +14,21 @@
 ;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
-(package! company-org-roam
-   :recipe (:host github :repo "jethrokuan/company-org-roam"))
-
-(unpin! org-roam)
+;; (unpin! org-roam)
 (package! org-roam
   :recipe (:host github :repo "org-roam/org-roam" :branch "master"))
 
 (package! lean-mode
    :recipe (:host github :repo "leanprover/lean-mode"))
+
+(package! org-books
+  :recipe (:host github :repo "goderich/org-books"))
+
+;; (package! org-alert
+;;   :recipe (:host github :repo "spegoraro/org-alert"))
+
+(package! org-alert
+  :recipe (:host github :repo "akhramov/org-wild-notifier.el"))
 
 (package! company-lean)
 (package! helm-lean)
@@ -31,6 +37,7 @@
 (package! haskell-mode)
 (package! anki-editor)
 (package! org-download)
+(package! ob-ipython)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
