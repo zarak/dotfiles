@@ -18,17 +18,20 @@
 (package! org-roam
   :recipe (:host github :repo "org-roam/org-roam" :branch "master"))
 
-(package! lean-mode
-   :recipe (:host github :repo "leanprover/lean-mode"))
+;; (package! lean-mode
+;;    :recipe (:host github :repo "leanprover/lean-mode"))
 
-(package! org-books
-  :recipe (:host github :repo "goderich/org-books"))
+(package! lean4-mode :pin "d1c936409ade7d93e67107243cbc0aa55cda7fd5"
+  :recipe (:host github :repo "leanprover/lean4-mode"))
+
+;; (package! org-books
+;;   :recipe (:host github :repo "goderich/org-books"))
 
 ;; (package! org-alert
 ;;   :recipe (:host github :repo "spegoraro/org-alert"))
 
-(package! org-alert
-  :recipe (:host github :repo "akhramov/org-wild-notifier.el"))
+;; (package! org-alert
+;;   :recipe (:host github :repo "akhramov/org-wild-notifier.el"))
 
 (package! company-lean)
 (package! helm-lean)
@@ -38,6 +41,8 @@
 (package! anki-editor)
 (package! org-download)
 (package! ob-ipython)
+(package! project)
+
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify

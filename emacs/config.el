@@ -22,7 +22,7 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 14 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 ;; (setq doom-font (font-spec :family "monospace" :size 16))
-(setq doom-font (font-spec :family "Pragmata Pro Mono" :size 16))
+(setq doom-font (font-spec :family "Pragmata Pro Mono" :size 18))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -85,15 +85,15 @@
       (deft-default-extension "org")
       (deft-directory "~/Dropbox/org/"))
 
-(use-package org-wild-notifier
-  :ensure t
-  :custom
-  (alert-default-style 'notifications)
-  (org-wild-notifier-alert-time `(1 5 30))
-  (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
-  (org-wild-notifier-notification-title "Agenda")
-  :config
-  (org-wild-notifier-mode 1))
+;; (use-package org-wild-notifier
+;;   :ensure t
+;;   :custom
+;;   (alert-default-style 'notifications)
+;;   (org-wild-notifier-alert-time `(1 5 30))
+;;   (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
+;;   (org-wild-notifier-notification-title "Agenda")
+;;   :config
+;;   (org-wild-notifier-mode 1))
 
 ;; Org-alerts
 ;; (use-package org-alert
