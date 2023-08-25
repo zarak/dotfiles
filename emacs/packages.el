@@ -39,6 +39,7 @@
 (package! org-super-agenda)
 (package! haskell-mode)
 (package! anki-editor)
+  ;; :recipe (:host github :repo "orgtre/anki-editor"))
 (package! org-download)
 (package! ob-ipython)
 (package! project)

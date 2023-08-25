@@ -29,7 +29,7 @@
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-horizon)
 ;; (setq doom-theme 'doom-old-hope)
-(setq doom-theme 'doom-badger)
+;; (setq doom-theme 'doom-badger)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -57,6 +57,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Mappings to correspond to neovim lsp diagnostics
+(map! :leader :prefix "]" :desc "Visit the N-th error from the current point." "d" #'flycheck-next-error)
+(map! :leader :prefix "[" :desc "Visit the N-th previous error." "d" #'flycheck-previous-error)
 
 ;; (require 'company-org-roam)
 ;;     (use-package company-org-roam
@@ -167,15 +170,22 @@
 (use-package! org-download
   :after org
   :config
-  (setq-default org-download-image-dir "./images/"
+  (setq-default org-download-image-dir "."
+                ;; org-download-image-dir "./images/"
                 org-download-screenshot-method "flameshot gui --raw > %s"
                 ;; org-download-screenshot-method "xclip -selection clipboard -t image/png -o > %s"
                 org-download-delete-image-after-download t
                 org-download-method 'directory
-                org-download-heading-lvl 1
+                ;; org-download-heading-lvl 1
+                org-download-heading-lvl nil
                 org-download-screenshot-file "/tmp/screenshot.png"
                 )
   )
+
+(use-package anki-editor
+  :after org
+  :init
+  (setq-default anki-editor-use-math-jax t))
 
 (map! :leader
         :prefix "n"
@@ -262,19 +272,19 @@
              '("m" "Math basic"
                entry
                (file+headline org-my-anki-file "Dispatch Shelf")
-               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: MathBasic\n:ANKI_DECK: AoPS\n:END:\n** Front\n%?\n** Back\n%x\n"))
+               "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: MathBasic\n:ANKI_DECK: All\n:END:\n** Front\n%?\n** Back\n%x\n"))
+)
 
 ;; (add-to-list 'org-capture-templates
 ;;              '("w" "PNP1: The True Novice"
 ;;                entry
 ;;                (file+headline org-my-workout-file "PNP1")
 ;;                "** %t\n*** Squat\n- %? \n*** Bench\n*** Deadlift\n"))
-(add-to-list 'org-capture-templates
-             '("w" "Home exercise"
-               entry
-               (file+headline org-my-workout-file "Home exercise")
-               "** TODO %t\n*** Pushup [/]\n- [ ] %? reps \n*** Squat [/]\n- [ ] 20kg x 15 reps\n"))
-)
+;; (add-to-list 'org-capture-templates
+;;              '("w" "Home exercise"
+;;                entry
+;;                (file+headline org-my-workout-file "Home exercise")
+;;                "** TODO %t\n*** Pushup [/]\n- [ ] %? reps \n*** Squat [/]\n- [ ] 20kg x 15 reps\n"))
 
 (after! org
   ;; Org-books
@@ -308,3 +318,6 @@
   ;; (require 'ob-ipython)
   )
 
+;; Turn off autosave mode because org-roam generates tons of
+;; autosave files due to failies
+(setq auto-save-default nil)
