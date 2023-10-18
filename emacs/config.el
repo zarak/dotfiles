@@ -165,14 +165,55 @@
 (use-package anki-editor
   :after org
   :init
-  (setq-default anki-editor-use-math-jax t))
+  (setq-default anki-editor-use-math-jax t)
+  :hook (org-capture-after-finalize . anki-editor-reset-cloze-number) ; Reset cloze number after each capture
+  :config
+  (defun anki-editor-cloze-region-auto-incr (&optional arg)
+    "Cloze region without hint and increase card number."
+    (interactive)
+    (anki-editor-cloze-region my-anki-editor-cloze-number "")
+    (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
+    (forward-sexp))
+  (defun anki-editor-cloze-region-dont-incr (&optional arg)
+    "Cloze region without hint using the previous card number."
+    (interactive)
+    (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
+    (forward-sexp))
+  (defun anki-editor-reset-cloze-number (&optional arg)
+    "Reset cloze number to ARG or 1"
+    (interactive)
+    (setq my-anki-editor-cloze-number (or arg 1)))
+  (defun anki-editor-push-tree ()
+    "Push all notes under a tree."
+    (interactive)
+    (anki-editor-push-notes '(4))
+    (anki-editor-reset-cloze-number))
+  ;; Initialize
+  (anki-editor-reset-cloze-number)
+  )
 
-(map! :leader
+(defun my/anki-editor-push-notes-wrapper ()
+  "Wrapper for 'anki-editor-push-notes' that warns if 'anki-editor' mode is not active."
+  (interactive)
+  (if anki-editor-mode
+      (anki-editor-push-notes)
+    (message "Error: anki-editor minor mode is not active. \
+              Media will not appear in media.collections")))
+
+(after! anki-editor
+  (map! :leader
         :prefix "n"
         :desc "Insert anki note" "i" #'anki-editor-insert-note
-        :desc "Push notes to anki" "p" #'anki-editor-push-notes
+        :desc "Push notes to anki" "p" #'my/anki-editor-push-notes-wrapper
         :desc "Capture and insert screenshot" "x" #'org-download-screenshot
+        (:prefix ("A" . "Anki")
+         :desc "Cloze region without hint and increase card number" "k" #'anki-editor-cloze-region-auto-incr
+         :desc "Cloze region without hint using the previous card number" "l" #'anki-editor-cloze-region-dont-incr
+         :desc "Reset cloze number to ARG or 1" "h" #'anki-editor-reset-cloze-number
+         :desc "Push all notes under a tree" "p" #'anki-editor-push-tree
+         )
         )
+  )
 
 ;; (after! org
   ;; https://github.com/hlissner/doom-emacs/issues/407#issuecomment-363215144
