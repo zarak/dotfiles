@@ -88,24 +88,6 @@
       (deft-default-extension "org")
       (deft-directory "~/Dropbox/org/"))
 
-;; (use-package org-wild-notifier
-;;   :ensure t
-;;   :custom
-;;   (alert-default-style 'notifications)
-;;   (org-wild-notifier-alert-time `(1 5 30))
-;;   (org-wild-notifier-keyword-whitelist `("TODO" "NEXT"))
-;;   (org-wild-notifier-notification-title "Agenda")
-;;   :config
-;;   (org-wild-notifier-mode 1))
-
-;; Org-alerts
-;; (use-package org-alert
-;;   :ensure t
-;;   ;; :custom (alert-default-style 'notifications)
-;;   :config
-;;   (setq org-alert-interval 300)
-;;   (org-alert-enable))
-
 ;; (after! org-roam
 ;;       (setq org-roam-capture-ref-templates
 ;;             '(("r" "ref" plain (function org-roam-capture--get-point)
@@ -118,13 +100,6 @@
 
 (after! company-lean
  (global-set-key (kbd "S-SPC") #'company-complete))
-
-(use-package! org-drill
-  :after org)
-
-(after! org-drill
-  (setq org-drill-left-cloze-delimiter "<["
-        org-drill-right-cloze-delimiter "]>"))
 
 (setq org-file-apps
       '((auto-mode . emacs)
