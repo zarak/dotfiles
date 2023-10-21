@@ -252,7 +252,6 @@
 ;; Org-capture templates
 (after! org
 (setq org-my-anki-file "~/Dropbox/org/anki/anki.org")
-(setq org-my-workout-file "~/Dropbox/org/Workouts.org")
 (add-to-list 'org-capture-templates
              '("a" "Anki basic"
                entry
@@ -271,21 +270,7 @@
                "* %<%H:%M>   %^g\n:PROPERTIES:\n:ANKI_NOTE_TYPE: MathBasic\n:ANKI_DECK: All\n:END:\n** Front\n%?\n** Back\n%x\n"))
 )
 
-;; (add-to-list 'org-capture-templates
-;;              '("w" "PNP1: The True Novice"
-;;                entry
-;;                (file+headline org-my-workout-file "PNP1")
-;;                "** %t\n*** Squat\n- %? \n*** Bench\n*** Deadlift\n"))
-;; (add-to-list 'org-capture-templates
-;;              '("w" "Home exercise"
-;;                entry
-;;                (file+headline org-my-workout-file "Home exercise")
-;;                "** TODO %t\n*** Pushup [/]\n- [ ] %? reps \n*** Squat [/]\n- [ ] 20kg x 15 reps\n"))
-
 (after! org
-  ;; Org-books
-  (setq org-books-file "~/Dropbox/org/reading-list.org")
-
   ;; Org-pomodoro
   ;; (setq org-pomodoro-audio-player "mplayer")
   ;; (setq org-pomodoro-finished-sound-args "-volume 20")
@@ -297,23 +282,8 @@
 
   ;; Play sound during pomodoro only (and not during breaks)
   (setq org-pomodoro-ticking-sound-states `(:pomodoro))
-
-  ;; Org-habit
-  (add-to-list 'org-modules 'org-habit)
-
-  ;; Org-template src blocks
-  ;; (add-to-list 'org-structure-template-alist '("ipy" . "src ipython :session :results output"))
-  ;; (add-to-list 'org-structure-template-alist '("ipyim" . "src ipython :session :results raw drawer"))
-  ;; (require 'org-tempo)
-
-  ;; (org-babel-do-load-languages
-  ;;  'org-bable-load-langauges
-  ;;  '((ipython . t)
-  ;;    ))
-
-  ;; (require 'ob-ipython)
   )
 
 ;; Turn off autosave mode because org-roam generates tons of
-;; autosave files due to failies
+;; autosave files due to dailies
 (setq auto-save-default nil)

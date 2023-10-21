@@ -24,24 +24,14 @@
 (package! lean4-mode :pin "d1c936409ade7d93e67107243cbc0aa55cda7fd5"
   :recipe (:host github :repo "leanprover/lean4-mode"))
 
-;; (package! org-books
-;;   :recipe (:host github :repo "goderich/org-books"))
-
-;; (package! org-alert
-;;   :recipe (:host github :repo "spegoraro/org-alert"))
-
-;; (package! org-alert
-;;   :recipe (:host github :repo "akhramov/org-wild-notifier.el"))
 
 (package! company-lean)
 (package! helm-lean)
-(package! org-drill)
 (package! org-super-agenda)
 (package! haskell-mode)
 (package! anki-editor
   :recipe (:host github :repo "orgtre/anki-editor"))
 (package! org-download)
-(package! ob-ipython)
 (package! project)
 
 
