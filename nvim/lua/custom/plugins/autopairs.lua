@@ -1,1 +1,11 @@
-/nix/store/7ywkmpl0pga6xf206i9zpfnrq7kh0198-home-manager-files/.config/nvim/lua/custom/plugins/autopairs.lua
+-- You can add your own plugins here or in other files in this directory!
+--  I promise not to create any merge conflicts in this directory :)
+--
+-- See the kickstart.nvim README for more information
+
+return {
+  "windwp/nvim-autopairs",
+  config = function()
+    require("nvim-autopairs").setup {}
+  end,
+}

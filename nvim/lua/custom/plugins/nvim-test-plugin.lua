@@ -1,1 +1,6 @@
-/nix/store/7ywkmpl0pga6xf206i9zpfnrq7kh0198-home-manager-files/.config/nvim/lua/custom/plugins/nvim-test-plugin.lua
+return {
+  dir = "/home/zarak/Projects/nvim-test-plugin",
+  event = "VeryLazy",
+  enabled = false
+  -- enable = true
+}
