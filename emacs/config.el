@@ -287,3 +287,4 @@
 ;; Turn off autosave mode because org-roam generates tons of
 ;; autosave files due to dailies
 (setq auto-save-default nil)
+

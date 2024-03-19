@@ -145,7 +145,7 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
-        ;; +roam              ; wander around notes
+        +roam2              ; wander around notes
         +hugo              ; org to hugo exporter
         +pomodoro)         ; be fruitful with the pomodoro technique
        ;;php               ; perl's insecure younger brother
@@ -189,4 +189,4 @@
 ;; https://github.com/org-roam/org-roam/issues/1205
 ;; (setq org-roam-completion-everywhere t)
 ;;
-(setq org-roam-v2-ack t)
+;; (setq org-roam-v2-ack t)
