@@ -288,3 +288,17 @@
 ;; autosave files due to dailies
 (setq auto-save-default nil)
 
+
+(use-package ob-sql-mode
+  :ensure t)
+(after! ob-sql-mode
+  (require 'ob-sql-mode))
+
+(setq shell-file-name (executable-find "bash"))
+
+(use-package org-tufte
+  :ensure nil
+  :config
+  (setq org-tufte-htmlize-code t
+        org-tufte-embed-images nil
+        org-tufte-goto-top-button t))

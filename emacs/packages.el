@@ -21,9 +21,12 @@
 ;; (package! lean-mode
 ;;    :recipe (:host github :repo "leanprover/lean-mode"))
 
-(package! lean4-mode :pin "d1c936409ade7d93e67107243cbc0aa55cda7fd5"
-  :recipe (:host github :repo "leanprover/lean4-mode"))
-
+;; (package! lean4-mode :pin "d1c936409ade7d93e67107243cbc0aa55cda7fd5"
+;;   :recipe (:host github :repo "leanprover/lean4-mode"))
+(package! lean4-mode :recipe
+  (:host github
+   :repo "leanprover/lean4-mode"
+   :files ("*.el" "data")))
 
 (package! company-lean)
 (package! helm-lean)
@@ -33,7 +36,10 @@
   :recipe (:host github :repo "orgtre/anki-editor"))
 (package! org-download)
 (package! project)
-
+(package! ob-sql-mode)
+(package! org-tufte
+  :recipe (:host github :repo "Zilong-Li/org-tufte" :branch "main"))
+(package! all-the-icons :disable t)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
